@@ -1,83 +1,624 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="비침습적 뇌자극 파형에 따른 전전두엽 혈류역학적 반응과 음식 선택 행동의 연관성을 탐색하는 연구" />
-    <title>DNS26 | fNIRS 기반 탐색 연구</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/style.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main">본문으로 건너뛰기</a>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="DNS26 홈"><span>DNS</span><b>26</b></a>
-      <button class="menu-button" aria-expanded="false" aria-controls="site-nav">메뉴</button>
-      <nav id="site-nav" aria-label="주요 탐색">
-        <a href="#study">연구 개요</a><a href="#design">연구 설계</a><a href="#outcomes">평가 변수</a><a href="#process">진행 과정</a>
-      </nav>
-    </header>
 
-    <main id="main">
-      <section class="hero" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow">EXPLORATORY fNIRS STUDY · VERSION 1.1</p>
-          <h1>뇌 반응의 변화가<br /><em>음식 선택</em>을 바꿀 수 있을까?</h1>
-          <p class="lede">비침습적 뇌자극 파형에 따른 전전두엽 혈류역학적 반응과 실제 음식 선택 행동의 연관성을 탐색합니다.</p>
-          <div class="hero-actions"><a class="button primary" href="#study">연구 살펴보기</a><a class="button text" href="#design">설계 보기 <span aria-hidden="true">↓</span></a></div>
+<head>
+  <meta charset="UTF-8">
+  <title>자극 24시간 후 응답 설문</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background: #f4f5f7;
+      color: #222;
+    }
+    .wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 8px 0 4px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 22px 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      display: none;
+    }
+    .card.active { display: block; }
+    .q-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .q-sub {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 18px 0 10px;
+      line-height: 1.5;
+    }
+    .q-sub:first-child { margin-top: 0; }
+    .q-help {
+      font-size: 13px;
+      color: #777;
+      margin: -8px 0 14px;
+      line-height: 1.5;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #4a7dff;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 6px;
+    }
+    label.option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    label.option:has(input:checked) {
+      border-color: #4a7dff;
+      background: #eef3ff;
+    }
+    label.option input { transform: scale(1.15); }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      margin-top: 6px;
+      font-family: inherit;
+    }
+    textarea { resize: vertical; min-height: 70px; }
+    .field-block { margin-bottom: 20px; }
+    .field-block:last-child { margin-bottom: 0; }
+    .vas-wrap { margin: 10px 0 6px; }
+    .vas-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 6px;
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 36px;
+      accent-color: #4a7dff;
+    }
+    .vas-value {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #4a7dff;
+      margin-top: 4px;
+    }
+    .nav-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
+    }
+    button {
+      flex: 1;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn-primary { background: #4a7dff; color: #fff; }
+    .btn-primary:disabled { background: #b9c7f2; cursor: not-allowed; }
+    .btn-secondary { background: #eee; color: #444; }
+    .error-msg {
+      color: #d9364f;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+    #status-screen {
+      text-align: center;
+      padding: 60px 20px;
+      display: none;
+    }
+    #status-screen.active { display: block; }
+    #status-screen p { font-size: 17px; line-height: 1.6; }
+    .download-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 26px;
+      background: #d9364f;
+      color: #fff;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>자극 24시간 후 응답 설문</h1>
+    <div class="subtitle">
+      연구 제목: 성인에서 배외측 전전두엽 반복 경두개 무작위잡음자극(tRNS)이 음식 관련 인지적 몰두 및 섭식 조절 곤란에 미치는 영향<br><br>
+      지난 24시간 동안의 경험을 기준으로 응답해 주십시오. 모든 응답은 자동으로 시각이 기록됩니다.
+    </div>
+
+    <!-- Q1: 연구참여번호 -->
+    <div class="card active" data-step="q1">
+      <div class="q-title">연구참여번호를 입력해 주세요.</div>
+      <div class="q-help">부여받으신 고유 연구참여번호를 입력해 주세요.</div>
+      <input type="text" id="participantId" placeholder="예: DGP25-SNU-001" autocomplete="off">
+      <div class="error-msg" id="err-q1">연구참여번호를 입력해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-primary" onclick="goNext('q1')">다음</button>
+      </div>
+    </div>
+
+    <!-- Q2: 현재 Period -->
+    <div class="card" data-step="q2">
+      <div class="q-title">현재 Period</div>
+      <div id="period-options">
+        <label class="option"><input type="radio" name="period" value="Period 1">Period 1</label>
+        <label class="option"><input type="radio" name="period" value="Period 2">Period 2</label>
+      </div>
+      <div class="error-msg" id="err-q2">응답을 선택해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" onclick="goNext('q2')">다음</button>
+      </div>
+    </div>
+
+    <!-- Q3: Day -->
+    <div class="card" data-step="q3">
+      <div class="q-title">오늘은 Day 몇 입니까?</div>
+      <div id="day-options">
+        <label class="option"><input type="radio" name="day" value="Day 0">Day 0</label>
+        <label class="option"><input type="radio" name="day" value="Day 1">Day 1</label>
+        <label class="option"><input type="radio" name="day" value="Day 2">Day 2</label>
+        <label class="option"><input type="radio" name="day" value="Day 3">Day 3</label>
+        <label class="option"><input type="radio" name="day" value="Day 4">Day 4</label>
+        <label class="option"><input type="radio" name="day" value="Day 5">Day 5</label>
+      </div>
+      <div class="error-msg" id="err-q3">응답을 선택해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" onclick="goNext('q3')">다음</button>
+      </div>
+    </div>
+
+    <!-- Q4: 마음을 차지하는 VAS -->
+    <div class="card" data-step="q4">
+      <div class="section-label">일일 설문 (지난 24시간 기준)</div>
+      <div class="q-title">지난 24시간 동안, 원치 않았음에도 불구하고 음식에 대한 생각에 집착했던 정도는 어느 정도였습니까? [일차 평가문항]</div>
+      <div class="vas-wrap">
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <input type="range" id="vasPreoccupation" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasPreoccupationValue">50</div>
+      </div>
+      <div class="error-msg" id="err-q4">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-q4" onclick="goNext('q4')" disabled>다음</button>
+      </div>
+    </div>
+
+    <!-- Q5: 조절 어려움 VAS (일일) -->
+    <div class="card" data-step="q5">
+      <div class="q-title">지난 24시간 동안 먹고 싶은 음식이나 섭취 상황에서, 의도한 양이나 방식대로 먹는 것을 조절하기 가장 어려웠던 정도는 어느 정도였습니까? [핵심 이차 문항]</div>
+      <div class="vas-wrap">
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <input type="range" id="vasDailyControl" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasDailyControlValue">50</div>
+      </div>
+      <div class="error-msg" id="err-q5">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-q5" onclick="goNext('q5')" disabled>다음</button>
+      </div>
+    </div>
+
+    <!-- Q6: 충동 강도 VAS (일일) -->
+    <div class="card" data-step="q6">
+      <div class="q-title">지난 24시간 동안 먹고 싶은 충동이 가장 강했던 정도는 어느 정도였습니까? [핵심 이차 문항]</div>
+      <div class="vas-wrap">
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <input type="range" id="vasDailyUrge" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasDailyUrgeValue">50</div>
+      </div>
+      <div class="error-msg" id="err-q6">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-q6" onclick="goNext('q6')" disabled>다음</button>
+      </div>
+    </div>
+
+    <!-- Q7: 배고픔 VAS -->
+    <div class="card" data-step="q7">
+      <div class="q-title">지난 24시간 동안 가장 배고팠던 순간의 배고픔 정도는 어느 정도였습니까?</div>
+      <div class="vas-wrap">
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <input type="range" id="vasHunger" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasHungerValue">50</div>
+      </div>
+      <div class="error-msg" id="err-q7">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-q7" onclick="goNext('q7')" disabled>다음</button>
+      </div>
+    </div>
+
+    <!-- Q8: 주의 분산 VAS -->
+    <div class="card" data-step="q8">
+      <div class="q-title">지난 24시간 동안 음식 생각 때문에 다른 일에 주의를 돌리기 어려웠던 정도는 어느 정도였습니까?</div>
+      <div class="vas-wrap">
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <input type="range" id="vasDistraction" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasDistractionValue">50</div>
+      </div>
+      <div class="error-msg" id="err-q8">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-q8" onclick="goNext('q8')" disabled>다음</button>
+      </div>
+    </div>
+
+    <!-- Q9: 불쾌감/지장 VAS -->
+    <div class="card" data-step="q9">
+      <div class="q-title">지난 24시간 동안 음식 생각이나 먹고 싶은 충동으로 인해 괴로웠던 정도는 어느 정도였습니까?</div>
+      <div class="vas-wrap">
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <input type="range" id="vasDistress" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasDistressValue">50</div>
+      </div>
+      <div class="error-msg" id="err-q9">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-q9" onclick="goNext('q9')" disabled>다음</button>
+      </div>
+    </div>
+
+    <!-- Q10: 야간 섭취 -->
+    <div class="card" data-step="q10">
+      <div class="q-title">오늘 밤(야간)에 계획하지 않은 방식으로 음식을 드신 적이 있습니까?</div>
+      <div id="night-options">
+        <label class="option"><input type="radio" name="nightEating" value="예">예</label>
+        <label class="option"><input type="radio" name="nightEating" value="아니오">아니오</label>
+      </div>
+      <div class="error-msg" id="err-q10">응답을 선택해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" onclick="goNext('q10')">다음</button>
+      </div>
+    </div>
+
+    <!-- Q11: 조절 상실 횟수 -->
+    <div class="card" data-step="q11">
+      <div class="section-label">조절 상실 관련 섭취 사건 (지난 24시간 기준)</div>
+      <div class="q-title">지난 24시간 동안 먹는 중 스스로 조절하기 어렵다고 느낀 적이 있습니까?</div>
+      <div id="loc-options">
+        <label class="option"><input type="radio" name="locCount" value="없음">없음</label>
+        <label class="option"><input type="radio" name="locCount" value="1회">1회</label>
+        <label class="option"><input type="radio" name="locCount" value="2회 이상">2회 이상</label>
+      </div>
+      <div class="error-msg" id="err-q11">응답을 선택해 주세요.</div>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" onclick="goNext('q11')">다음</button>
+      </div>
+    </div>
+
+    <!-- 사건 1 -->
+    <div class="card" data-step="event1">
+      <div class="q-title">사건 1 (해당 시에만 작성)</div>
+      <div class="q-help">11번에서 1회 또는 2회 이상을 선택한 경우 작성합니다. 아래 항목은 모두 선택 입력입니다.</div>
+
+      <div class="field-block">
+        <div class="q-sub">사건 1 - 발생 시각 (예: 오후 3시경)</div>
+        <input type="text" id="event1Time" placeholder="예: 오후 3시경">
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 1 - 지속 시간 (예: 20분)</div>
+        <input type="text" id="event1Duration" placeholder="예: 20분">
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 1 - 섭취한 음식 종류(대략적 개수)</div>
+        <textarea id="event1Food" rows="2"></textarea>
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 1 - 그 순간 스스로 조절할 수 없다고 느낀 정도 (0~100)</div>
+        <div class="vas-wrap">
+          <div class="vas-labels"><span>0</span><span>100</span></div>
+          <input type="range" id="event1ControlVas" min="0" max="100" step="1" value="50">
+          <div class="vas-value" id="event1ControlVasValue">50</div>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <svg viewBox="0 0 520 500" role="presentation"><path class="brain" d="M258 68c-70-24-143 24-151 95-7 60 27 91 12 127-11 27-4 67 26 83 22 12 38 9 55 30 29 35 85 29 108-5 11-16 17-31 36-40 44-21 47-84 11-111 21-34 16-79-8-105-25-28-59-30-89-17Z"/><path class="fold" d="M138 170c35-25 78-17 97 8m-75 83c35 22 72 12 89-11m-27-156c-4 39 13 69 45 82m-1 0c43-25 82-3 95 29m-58 144c-9-33 9-59 40-70m-2-142c-30 24-34 62-12 88m-76 73c-18 29-15 64 11 86"/><circle class="node" cx="180" cy="166" r="8"/><circle class="node" cx="292" cy="173" r="8"/><circle class="node" cx="333" cy="272" r="8"/><path class="signal" d="M72 275h42l16-42 23 83 26-62h36"/></svg>
-          <p>dlPFC · fNIRS · FOOD CHOICE</p>
+        <div class="error-msg" id="err-event1">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 1 - 그 사건으로 인해 느낀 괴로움의 정도 (0~100)</div>
+        <div class="vas-wrap">
+          <div class="vas-labels"><span>0</span><span>100</span></div>
+          <input type="range" id="event1DistressVas" min="0" max="100" step="1" value="50">
+          <div class="vas-value" id="event1DistressVasValue">50</div>
         </div>
-      </section>
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 1 - 섭취량이 그 상황에서 객관적으로 많았다고 생각하십니까?</div>
+        <label class="option"><input type="radio" name="event1AmountLarge" value="예">예</label>
+        <label class="option"><input type="radio" name="event1AmountLarge" value="아니오">아니오</label>
+        <label class="option"><input type="radio" name="event1AmountLarge" value="잘 모르겠음">잘 모르겠음</label>
+      </div>
 
-      <section class="stats" aria-label="연구 핵심 수치">
-        <div><strong>90</strong><span>건강한 성인</span></div><div><strong>3</strong><span>무작위 배정 군</span></div><div><strong>8</strong><span>방문 일정</span></div><div><strong>6</strong><span>누적 자극 회기</span></div>
-      </section>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-event1" onclick="goNext('event1')" disabled>다음</button>
+      </div>
+    </div>
 
-      <section class="section" id="study">
-        <div class="section-kicker"><span>01</span> STUDY QUESTION</div>
-        <div class="two-column"><div><h2>전전두엽의 반응과<br />섭식 행동을 함께 봅니다.</h2></div><div class="body-copy"><p>배외측 전전두엽(dlPFC)은 보상 자극에 대한 인지적 조절과 억제 통제에 관여합니다. 이 연구는 서로 다른 비침습적 뇌자극 파형이 전전두엽 혈류역학적 반응에 미치는 변화와 실제 음식 선택 행동의 변화를 함께 탐색합니다.</p><p>fNIRS로 고쾌락 식품 자극에 대한 산소화 혈색소 변화량을 측정하고, Taste task 및 Buffet test를 통해 관찰되는 행동 지표와의 연관성을 살펴봅니다.</p></div></div>
-      </section>
+    <!-- 사건 2 -->
+    <div class="card" data-step="event2">
+      <div class="q-title">사건 2 (2회 이상인 경우에만 작성)</div>
+      <div class="q-help">11번에서 2회 이상을 선택한 경우에만 작성합니다. 아래 항목은 모두 선택 입력입니다.</div>
 
-      <section class="section panel" id="design">
-        <div class="section-kicker"><span>02</span> STUDY DESIGN</div>
-        <h2>무작위 · 이중 눈가림 · 가자극 대조<br />3군 병행 탐색 연구</h2>
-        <div class="arms">
-          <article><div class="arm-num">01</div><h3>Sham</h3><p>자극 시작과 종료 시 ramping을 적용한 가자극 조건</p></article>
-          <article><div class="arm-num">02</div><h3>tDCS</h3><p>2 mA 경두개 직류자극, 회기당 20분</p></article>
-          <article><div class="arm-num">03</div><h3>tDNS</h3><p>2 mA, 100–500 Hz 경두개 노이즈 자극, 회기당 20분</p></article>
+      <div class="field-block">
+        <div class="q-sub">사건 2 - 발생 시각 (예: 오후 3시경)</div>
+        <input type="text" id="event2Time" placeholder="예: 오후 3시경">
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 2 - 지속 시간 (예: 20분)</div>
+        <input type="text" id="event2Duration" placeholder="예: 20분">
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 2 - 섭취한 음식 종류(대략적 개수)</div>
+        <textarea id="event2Food" rows="2"></textarea>
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 2 - 그 순간 스스로 조절할 수 없다고 느낀 정도 (0~100)</div>
+        <div class="vas-wrap">
+          <div class="vas-labels"><span>0</span><span>100</span></div>
+          <input type="range" id="event2ControlVas" min="0" max="100" step="1" value="50">
+          <div class="vas-value" id="event2ControlVasValue">50</div>
         </div>
-        <p class="design-note">각 군은 2–3주 동안 총 6회의 자극을 받습니다. 자극 위치는 계획서에 명시된 FP1/FP2입니다.</p>
-      </section>
-
-      <section class="section" id="outcomes">
-        <div class="section-kicker"><span>03</span> OUTCOMES</div>
-        <h2>뇌 신호에서 실제 선택까지</h2>
-        <div class="outcomes">
-          <article><span class="tag">PRIMARY</span><h3>전전두엽 △HbO 변화</h3><p>Baseline과 post-intervention에서 Taste task의 고쾌락 음식 자극 시 fNIRS로 측정한 산소화 혈색소 변화량을 군 간 비교합니다.</p></article>
-          <article><span class="tag">SECONDARY</span><h3>음식 선택과 섭취</h3><p>고쾌락·건강 식품 선택의 변화, Buffet test의 섭취 칼로리·섭취량·영양 성분·식사 시간을 평가합니다.</p></article>
-          <article><span class="tag">SECONDARY</span><h3>심리 및 식욕 지표</h3><p>심리 설문과 각 자극 전후 appetite VAS 및 GFCQ-S를 통해 급성 및 누적 효과를 탐색합니다.</p></article>
+        <div class="error-msg" id="err-event2">슬라이더를 움직여 응답을 확인해 주세요.</div>
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 2 - 그 사건으로 인해 느낀 괴로움의 정도 (0~100)</div>
+        <div class="vas-wrap">
+          <div class="vas-labels"><span>0</span><span>100</span></div>
+          <input type="range" id="event2DistressVas" min="0" max="100" step="1" value="50">
+          <div class="vas-value" id="event2DistressVasValue">50</div>
         </div>
-      </section>
+      </div>
+      <div class="field-block">
+        <div class="q-sub">사건 2 - 섭취량이 그 상황에서 객관적으로 많았다고 생각하십니까?</div>
+        <label class="option"><input type="radio" name="event2AmountLarge" value="예">예</label>
+        <label class="option"><input type="radio" name="event2AmountLarge" value="아니오">아니오</label>
+        <label class="option"><input type="radio" name="event2AmountLarge" value="잘 모르겠음">잘 모르겠음</label>
+      </div>
 
-      <section class="section timeline-section" id="process">
-        <div class="section-kicker"><span>04</span> PARTICIPANT JOURNEY</div>
-        <h2>8회의 방문으로 이루어집니다.</h2>
-        <ol class="timeline">
-          <li><span>V1</span><div><h3>Baseline</h3><p>동의 및 스크리닝, 무작위 배정, 신체계측, 심리 평가, Taste task + fNIRS, Buffet test</p></div></li>
-          <li><span>V2–V7</span><div><h3>6회 누적 자극</h3><p>자극 전 설문 · 배정된 자극 조건 · 자극 후 설문</p></div></li>
-          <li><span>V8</span><div><h3>Post-intervention</h3><p>신체계측, 심리 평가, Taste task + fNIRS, Buffet test</p></div></li>
-        </ol>
-      </section>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" id="next-event2" onclick="goNext('event2')" disabled>다음</button>
+      </div>
+    </div>
 
-      <section class="cta"><p class="eyebrow">RESEARCH INFORMATION</p><h2>공개용 연구 개요</h2><p>본 페이지는 연구계획서 기반의 정보 요약입니다. 연구 참여 및 의학적 판단을 위한 자료로 사용되지 않습니다.</p></section>
-    </main>
-    <footer><a class="brand" href="#top"><span>DNS</span><b>26</b></a><p>Non-invasive Brain Stimulation × Food Choice</p><p>© 2026</p></footer>
-    <script src="assets/main.js"></script>
-  </body>
+    <!-- Q22: 제출 완료 -->
+    <div class="card" data-step="q22">
+      <div class="section-label">제출 완료</div>
+      <div class="q-title">(선택) 추가로 남기고 싶은 말씀이 있으면 적어주세요</div>
+      <textarea id="freeText" rows="4"></textarea>
+      <div class="nav-row">
+        <button class="btn-secondary" onclick="goBack()">이전</button>
+        <button class="btn-primary" onclick="submitSurvey()">제출하기</button>
+      </div>
+    </div>
+
+    <div id="status-screen">
+      <p id="status-text"></p>
+      <div id="status-download"></div>
+    </div>
+  </div>
+
+  <script>
+    // Apps Script 배포 웹 앱 URL (.../exec)
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzbz9w2xBLjlZYtfcThIn5J82YtVFoHDu1FygHBEEHu00d38E_93wc-Ykb4iFKghTy_/exec';
+
+    let history = ['q1'];
+
+    function showStep(step) {
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+      document.querySelector(`.card[data-step="${step}"]`).classList.add('active');
+    }
+
+    function showError(step, show) {
+      const el = document.getElementById(`err-${step}`);
+      if (el) el.style.display = show ? 'block' : 'none';
+    }
+
+    function validateStep(step) {
+      if (step === 'q1') {
+        const val = document.getElementById('participantId').value.trim();
+        showError('q1', !val);
+        return !!val;
+      }
+      if (step === 'q2') {
+        const val = document.querySelector('input[name="period"]:checked');
+        showError('q2', !val);
+        return !!val;
+      }
+      if (step === 'q3') {
+        const val = document.querySelector('input[name="day"]:checked');
+        showError('q3', !val);
+        return !!val;
+      }
+      if (step === 'q10') {
+        const val = document.querySelector('input[name="nightEating"]:checked');
+        showError('q10', !val);
+        return !!val;
+      }
+      if (step === 'q11') {
+        const val = document.querySelector('input[name="locCount"]:checked');
+        showError('q11', !val);
+        return !!val;
+      }
+      if (vasGatedSteps.includes(step)) {
+        const ok = vasTouched[step];
+        showError(step, !ok);
+        return ok;
+      }
+      return true;
+    }
+
+    // 다음 단계 결정 (분기 포함)
+    function nextStepAfter(step) {
+      const order = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11'];
+      if (step === 'q11') {
+        const locCount = document.querySelector('input[name="locCount"]:checked').value;
+        if (locCount === '없음') return 'q22';
+        return 'event1';
+      }
+      if (step === 'event1') {
+        const locCount = document.querySelector('input[name="locCount"]:checked')?.value;
+        return locCount === '2회 이상' ? 'event2' : 'q22';
+      }
+      if (step === 'event2') return 'q22';
+
+      const idx = order.indexOf(step);
+      if (idx !== -1 && idx < order.length - 1) return order[idx + 1];
+      return 'q22';
+    }
+
+    function goNext(step) {
+      if (!validateStep(step)) return;
+      const next = nextStepAfter(step);
+      history.push(next);
+      showStep(next);
+    }
+
+    function goBack() {
+      if (history.length <= 1) return;
+      history.pop();
+      const prev = history[history.length - 1];
+      showStep(prev);
+    }
+
+    const vasGatedSteps = ['q4','q5','q6','q7','q8','q9','event1','event2'];
+    const vasTouched = {};
+    vasGatedSteps.forEach(step => { vasTouched[step] = false; });
+
+    function bindVas(id, gatedStep) {
+      const slider = document.getElementById(id);
+      const valueEl = document.getElementById(id + 'Value');
+      slider.addEventListener('input', () => {
+        valueEl.textContent = slider.value;
+        if (gatedStep) {
+          vasTouched[gatedStep] = true;
+          document.getElementById('next-' + gatedStep).disabled = false;
+          showError(gatedStep, false);
+        }
+      });
+    }
+    bindVas('vasPreoccupation', 'q4');
+    bindVas('vasDailyControl', 'q5');
+    bindVas('vasDailyUrge', 'q6');
+    bindVas('vasHunger', 'q7');
+    bindVas('vasDistraction', 'q8');
+    bindVas('vasDistress', 'q9');
+    bindVas('event1ControlVas', 'event1');
+    bindVas('event2ControlVas', 'event2');
+    bindVas('event1DistressVas');
+    bindVas('event2DistressVas');
+
+    function collectData() {
+      const locCount = document.querySelector('input[name="locCount"]:checked')?.value || '없음';
+      const data = {
+        participantId: document.getElementById('participantId').value.trim(),
+        responseDate: new Date().toISOString().slice(0, 10),
+        period: document.querySelector('input[name="period"]:checked')?.value || '',
+        day: document.querySelector('input[name="day"]:checked')?.value || '',
+        vasPreoccupation: Number(document.getElementById('vasPreoccupation').value),
+        vasDailyControl: Number(document.getElementById('vasDailyControl').value),
+        vasDailyUrge: Number(document.getElementById('vasDailyUrge').value),
+        vasHunger: Number(document.getElementById('vasHunger').value),
+        vasDistraction: Number(document.getElementById('vasDistraction').value),
+        vasDistress: Number(document.getElementById('vasDistress').value),
+        nightEating: document.querySelector('input[name="nightEating"]:checked')?.value || '',
+        locCount: locCount,
+        freeText: document.getElementById('freeText').value.trim()
+      };
+
+      if (locCount !== '없음') {
+        data.event1Time = document.getElementById('event1Time').value.trim();
+        data.event1Duration = document.getElementById('event1Duration').value.trim();
+        data.event1Food = document.getElementById('event1Food').value.trim();
+        data.event1ControlVas = Number(document.getElementById('event1ControlVas').value);
+        data.event1DistressVas = Number(document.getElementById('event1DistressVas').value);
+        data.event1AmountLarge = document.querySelector('input[name="event1AmountLarge"]:checked')?.value || '';
+      }
+      if (locCount === '2회 이상') {
+        data.event2Time = document.getElementById('event2Time').value.trim();
+        data.event2Duration = document.getElementById('event2Duration').value.trim();
+        data.event2Food = document.getElementById('event2Food').value.trim();
+        data.event2ControlVas = Number(document.getElementById('event2ControlVas').value);
+        data.event2DistressVas = Number(document.getElementById('event2DistressVas').value);
+        data.event2AmountLarge = document.querySelector('input[name="event2AmountLarge"]:checked')?.value || '';
+      }
+      return data;
+    }
+
+    function submitSurvey() {
+      const data = collectData();
+
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+      const statusScreen = document.getElementById('status-screen');
+      statusScreen.classList.add('active');
+      document.getElementById('status-text').textContent = '전송 중입니다...';
+
+      try {
+        localStorage.setItem(
+          `loc26_backup_${data.participantId}_${Date.now()}`,
+          JSON.stringify(data)
+        );
+      } catch (e) { /* localStorage 사용 불가 시 무시 */ }
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      })
+        .then(() => {
+          document.getElementById('status-text').innerHTML =
+            '응답이 정상적으로 제출되었습니다.<br>감사합니다.';
+        })
+        .catch(() => {
+          const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          document.getElementById('status-text').innerHTML =
+            '네트워크 오류로 전송에 실패했습니다.<br>아래 버튼으로 백업 파일을 저장한 뒤 연구자에게 전달해 주세요.';
+          document.getElementById('status-download').innerHTML =
+            `<a class="download-link" href="${url}" download="loc26_${data.participantId}_${Date.now()}.json">⬇ 백업 파일 저장</a>`;
+        });
+    }
+  </script>
+</body>
+
 </html>

@@ -196,7 +196,7 @@
 
     <!-- Q2: 현재 기간 -->
     <div class="card" data-step="q2">
-      <div class="q-title">현재 몇 차 기간입니까?</div>
+      <div class="q-title">현재 몇차 시기입니까?</div>
       <div id="period-options">
         <label class="option"><input type="radio" name="period" value="1차">1차</label>
         <label class="option"><input type="radio" name="period" value="2차">2차</label>
@@ -237,7 +237,7 @@
     <!-- Q4: 마음을 차지하는 VAS -->
     <div class="card" data-step="q4">
       <div class="section-label">일일 설문 (지난 24시간 기준)</div>
-      <div class="q-title">지난 24시간 동안, 원하지 않는데도 음식에 대한 생각에 집착했던 적이 있으신가요?</div>
+      <div class="q-title">1. 지난 24시간 동안, 원하지 않았는데도 음식에 대한 생각에 집착했던 적이 있으신가요?</div>
       <div class="vas-wrap">
         <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 자주 있었다)</span></div>
         <input type="range" id="vasPreoccupation" min="0" max="100" step="1" value="50">
@@ -252,7 +252,7 @@
 
     <!-- Q5: 주의 분산 VAS (일일) -->
     <div class="card" data-step="q5">
-      <div class="q-title">지난 24시간 동안 음식 생각 때문에 다른 일에 집중하기가 어려웠던 순간이 있었나요?</div>
+      <div class="q-title">2. 지난 24시간 동안 음식 생각 때문에 다른 일에 집중하기가 어려웠던 순간이 있었나요?</div>
       <div class="vas-wrap">
         <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 자주 있었다)</span></div>
         <input type="range" id="vasDistraction" min="0" max="100" step="1" value="50">
@@ -267,7 +267,7 @@
 
     <!-- Q6: 충동 강도 VAS (일일) -->
     <div class="card" data-step="q6">
-      <div class="q-title">지난 24시간 동안 먹고 싶은 충동이 가장 강했던 정도는 어느 정도였습니까?</div>
+      <div class="q-title">3. 지난 24시간 동안 먹고 싶은 충동이 가장 강했던 정도는 어느 정도였습니까?</div>
       <div class="vas-wrap">
         <div class="vas-labels"><span>0 (전혀 강하지 않았다)</span><span>100 (매우 강했다)</span></div>
         <input type="range" id="vasDailyUrge" min="0" max="100" step="1" value="50">
@@ -282,7 +282,7 @@
 
     <!-- Q7: 배고픔 VAS -->
     <div class="card" data-step="q7">
-      <div class="q-title">지난 24시간 동안 가장 배고팠던 순간, 배고픔을 얼마나 강하게 느꼈습니까?</div>
+      <div class="q-title">4. 지난 24시간 동안 가장 배고팠던 순간, 배고픔을 얼마나 강하게 느꼈습니까?</div>
       <div class="vas-wrap">
         <div class="vas-labels"><span>0 (전혀 배고프지 않았다)</span><span>100 (매우 배가 고팠다)</span></div>
         <input type="range" id="vasHunger" min="0" max="100" step="1" value="50">
@@ -420,6 +420,18 @@
     // Apps Script 배포 웹 앱 URL (.../exec)
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCDTF2gns-hTUygVJLr2GUzTcVXUPQsUmoHHo5IJ-c16bYKFeNH0Cgso7nGl45kvqC/exec';
 
+    function formatKSTDateTime(date) {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+      }).formatToParts(date);
+      const get = type => parts.find(p => p.type === type)?.value;
+      return `${get('year')}-${get('month')}-${get('day')} ${get('hour')}:${get('minute')}:${get('second')}`;
+    }
+    function formatKSTDate(date) {
+      return formatKSTDateTime(date).slice(0, 10);
+    }
+
     let history = ['q1'];
 
     function showStep(step) {
@@ -478,7 +490,8 @@
       for (let i = 1; i <= count; i++) {
         const label = document.createElement('label');
         label.className = 'option';
-        label.innerHTML = `<input type="radio" name="stimSession" value="${i}회">${i}회`;
+        const text = `${phase} ${i}회차`;
+        label.innerHTML = `<input type="radio" name="stimSession" value="${text}">${text}`;
         container.appendChild(label);
       }
     }
@@ -547,7 +560,7 @@
       const data = {
         regNumber: document.getElementById('regNumber').value.trim(),
         participantName: document.getElementById('participantName').value.trim(),
-        responseDate: new Date().toISOString().slice(0, 10),
+        responseDate: formatKSTDate(new Date()),
         period: document.querySelector('input[name="period"]:checked')?.value || '',
         stimPhase: document.querySelector('input[name="stimPhase"]:checked')?.value || '',
         stimSession: document.querySelector('input[name="stimSession"]:checked')?.value || '',
@@ -593,7 +606,7 @@
         '자유기술'
       ];
       const row = [
-        new Date().toISOString(), data.regNumber, data.participantName, data.responseDate, data.period, data.stimPhase, data.stimSession,
+        formatKSTDateTime(new Date()), data.regNumber, data.participantName, data.responseDate, data.period, data.stimPhase, data.stimSession,
         data.vasPreoccupation, data.vasDistraction, data.vasDailyUrge, data.vasHunger,
         data.locCount,
         data.event1Time, data.event1DurationHour, data.event1DurationMin, data.event1Food, data.event1ControlVas, data.event1GuiltVas,

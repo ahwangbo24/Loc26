@@ -399,7 +399,7 @@
 
   <script>
     // Apps Script 배포 웹 앱 URL (.../exec)
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzbz9w2xBLjlZYtfcThIn5J82YtVFoHDu1FygHBEEHu00d38E_93wc-Ykb4iFKghTy_/exec';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9EUtzIqudAXl3yG2jhg18k8sEtpVBLO2douzTds2Wt4-1MNwUkP3NuKoTKUzjUBbZPQ/exec';
 
     let history = ['q1'];
 
@@ -534,6 +534,45 @@
       return data;
     }
 
+    function csvEscape(val) {
+      const s = (val === undefined || val === null) ? '' : String(val);
+      return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+    }
+
+    function buildCsv(data) {
+      const headers = [
+        '제출시각(로컬)', '연구참여번호', '응답날짜', 'Period', 'Day',
+        '집착VAS', '주의분산VAS', '충동강도VAS', '배고픔VAS', '괴로움VAS',
+        '조절상실횟수',
+        '사건1_발생시각', '사건1_지속시간', '사건1_음식종류', '사건1_조절VAS', '사건1_죄책감VAS',
+        '사건2_발생시각', '사건2_지속시간', '사건2_음식종류', '사건2_조절VAS', '사건2_죄책감VAS',
+        '자유기술'
+      ];
+      const row = [
+        new Date().toISOString(), data.participantId, data.responseDate, data.period, data.day,
+        data.vasPreoccupation, data.vasDistraction, data.vasDailyUrge, data.vasHunger, data.vasDistress,
+        data.locCount,
+        data.event1Time, data.event1Duration, data.event1Food, data.event1ControlVas, data.event1GuiltVas,
+        data.event2Time, data.event2Duration, data.event2Food, data.event2ControlVas, data.event2GuiltVas,
+        data.freeText
+      ];
+      return '﻿' + headers.map(csvEscape).join(',') + '\n' + row.map(csvEscape).join(',');
+    }
+
+    function downloadCsvBackup(data) {
+      try {
+        const blob = new Blob([buildCsv(data)], { type: 'text/csv;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `loc26_${data.participantId}_${Date.now()}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      } catch (e) { /* CSV 다운로드 실패 시 무시 (JSON 백업은 별도로 저장됨) */ }
+    }
+
     function submitSurvey() {
       const data = collectData();
 
@@ -548,6 +587,8 @@
           JSON.stringify(data)
         );
       } catch (e) { /* localStorage 사용 불가 시 무시 */ }
+
+      downloadCsvBackup(data);
 
       fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',

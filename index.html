@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>자극 24시간 후 응답 설문</title>
+  <title>자극 전후 설문</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * { box-sizing: border-box; }
@@ -171,29 +171,35 @@
 
 <body>
   <div class="wrap">
-    <h1>자극 24시간 후 응답 설문</h1>
+    <h1>자극 전후 설문</h1>
     <div class="subtitle">
       연구 제목: 성인에서 배외측 전전두엽 반복 경두개 무작위잡음자극(tRNS)이 음식 관련 인지적 몰두 및 섭식 조절 곤란에 미치는 영향<br><br>
       지난 24시간 동안의 경험을 기준으로 응답해 주십시오. 모든 응답은 자동으로 시각이 기록됩니다.
     </div>
 
-    <!-- Q1: 연구참여번호 -->
+    <!-- Q1: 연구등록번호 + 이름 -->
     <div class="card active" data-step="q1">
-      <div class="q-title">연구참여번호를 입력해 주세요.</div>
-      <div class="q-help">부여받으신 고유 연구참여번호를 입력해 주세요.</div>
-      <input type="text" id="participantId" placeholder="예: DGP25-SNU-001" autocomplete="off">
-      <div class="error-msg" id="err-q1">연구참여번호를 입력해 주세요.</div>
+      <div class="q-title">연구등록번호와 이름을 입력해 주세요.</div>
+      <div class="field-block">
+        <div class="q-sub">연구등록번호 (3자리)</div>
+        <input type="text" id="regNumber" placeholder="예: 001" maxlength="3" inputmode="numeric" autocomplete="off">
+      </div>
+      <div class="field-block">
+        <div class="q-sub">이름</div>
+        <input type="text" id="participantName" placeholder="이름 입력" autocomplete="off">
+      </div>
+      <div class="error-msg" id="err-q1">연구등록번호(3자리 숫자)와 이름을 모두 입력해 주세요.</div>
       <div class="nav-row">
         <button class="btn-primary" onclick="goNext('q1')">다음</button>
       </div>
     </div>
 
-    <!-- Q2: 현재 Period -->
+    <!-- Q2: 현재 기간 -->
     <div class="card" data-step="q2">
-      <div class="q-title">현재 Period</div>
+      <div class="q-title">현재 몇 차 기간입니까?</div>
       <div id="period-options">
-        <label class="option"><input type="radio" name="period" value="Period 1">Period 1</label>
-        <label class="option"><input type="radio" name="period" value="Period 2">Period 2</label>
+        <label class="option"><input type="radio" name="period" value="1차">1차</label>
+        <label class="option"><input type="radio" name="period" value="2차">2차</label>
       </div>
       <div class="error-msg" id="err-q2">응답을 선택해 주세요.</div>
       <div class="nav-row">
@@ -231,7 +237,7 @@
     <!-- Q4: 마음을 차지하는 VAS -->
     <div class="card" data-step="q4">
       <div class="section-label">일일 설문 (지난 24시간 기준)</div>
-      <div class="q-title">지난 24시간 동안, 원하지 않는데도 음식에 대한 생각에 집착했던 적이 있으신가요? [일차 평가문항]</div>
+      <div class="q-title">지난 24시간 동안, 원하지 않는데도 음식에 대한 생각에 집착했던 적이 있으신가요?</div>
       <div class="vas-wrap">
         <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 자주 있었다)</span></div>
         <input type="range" id="vasPreoccupation" min="0" max="100" step="1" value="50">
@@ -246,9 +252,9 @@
 
     <!-- Q5: 주의 분산 VAS (일일) -->
     <div class="card" data-step="q5">
-      <div class="q-title">지난 24시간 동안 음식 생각 때문에 다른 일에 집중하기가 어려웠던 순간, 집중하기 얼마나 어려웠습니까?</div>
+      <div class="q-title">지난 24시간 동안 음식 생각 때문에 다른 일에 집중하기가 어려웠던 순간이 있었나요?</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 어렵지 않았다)</span><span>100 (매우 어려웠다)</span></div>
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 자주 있었다)</span></div>
         <input type="range" id="vasDistraction" min="0" max="100" step="1" value="50">
         <div class="vas-value" id="vasDistractionValue">50</div>
       </div>
@@ -261,7 +267,7 @@
 
     <!-- Q6: 충동 강도 VAS (일일) -->
     <div class="card" data-step="q6">
-      <div class="q-title">지난 24시간 동안 특정 음식이 가장 먹고 싶었던 순간, 그 음식을 먹고 싶은 마음은 얼마나 강했습니까? [핵심 이차 문항]</div>
+      <div class="q-title">지난 24시간 동안 먹고 싶은 충동이 가장 강했던 정도는 어느 정도였습니까?</div>
       <div class="vas-wrap">
         <div class="vas-labels"><span>0 (전혀 강하지 않았다)</span><span>100 (매우 강했다)</span></div>
         <input type="range" id="vasDailyUrge" min="0" max="100" step="1" value="50">
@@ -278,7 +284,7 @@
     <div class="card" data-step="q7">
       <div class="q-title">지난 24시간 동안 가장 배고팠던 순간, 배고픔을 얼마나 강하게 느꼈습니까?</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 배고프지 않았다)</span><span>100 (매우 배고팠다)</span></div>
+        <div class="vas-labels"><span>0 (전혀 배고프지 않았다)</span><span>100 (매우 배가 고팠다)</span></div>
         <input type="range" id="vasHunger" min="0" max="100" step="1" value="50">
         <div class="vas-value" id="vasHungerValue">50</div>
       </div>
@@ -286,21 +292,6 @@
       <div class="nav-row">
         <button class="btn-secondary" onclick="goBack()">이전</button>
         <button class="btn-primary" id="next-q7" onclick="goNext('q7')" disabled>다음</button>
-      </div>
-    </div>
-
-    <!-- Q8: 괴로움 VAS -->
-    <div class="card" data-step="q8">
-      <div class="q-title">지난 24시간 동안 음식 생각이나 먹고 싶은 충동 때문에 가장 괴로웠던 순간, 얼마나 괴로웠습니까?</div>
-      <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 괴롭지 않았다)</span><span>100 (매우 괴로웠다)</span></div>
-        <input type="range" id="vasDistress" min="0" max="100" step="1" value="50">
-        <div class="vas-value" id="vasDistressValue">50</div>
-      </div>
-      <div class="error-msg" id="err-q8">슬라이더를 움직여 응답을 확인해 주세요.</div>
-      <div class="nav-row">
-        <button class="btn-secondary" onclick="goBack()">이전</button>
-        <button class="btn-primary" id="next-q8" onclick="goNext('q8')" disabled>다음</button>
       </div>
     </div>
 
@@ -443,9 +434,11 @@
 
     function validateStep(step) {
       if (step === 'q1') {
-        const val = document.getElementById('participantId').value.trim();
-        showError('q1', !val);
-        return !!val;
+        const reg = document.getElementById('regNumber').value.trim();
+        const name = document.getElementById('participantName').value.trim();
+        const ok = /^\d{3}$/.test(reg) && !!name;
+        showError('q1', !ok);
+        return ok;
       }
       if (step === 'q2') {
         const val = document.querySelector('input[name="period"]:checked');
@@ -492,7 +485,7 @@
 
     // 다음 단계 결정 (분기 포함)
     function nextStepAfter(step) {
-      const order = ['q1','q2','q3a','q3b','q4','q5','q6','q7','q8','q9'];
+      const order = ['q1','q2','q3a','q3b','q4','q5','q6','q7','q9'];
       if (step === 'q9') {
         const locCount = document.querySelector('input[name="locCount"]:checked').value;
         if (locCount === '없음') return 'q22';
@@ -524,7 +517,7 @@
       showStep(prev);
     }
 
-    const vasGatedSteps = ['q4','q5','q6','q7','q8','event1','event2'];
+    const vasGatedSteps = ['q4','q5','q6','q7','event1','event2'];
     const vasTouched = {};
     vasGatedSteps.forEach(step => { vasTouched[step] = false; });
 
@@ -544,7 +537,6 @@
     bindVas('vasDistraction', 'q5');
     bindVas('vasDailyUrge', 'q6');
     bindVas('vasHunger', 'q7');
-    bindVas('vasDistress', 'q8');
     bindVas('event1ControlVas', 'event1');
     bindVas('event2ControlVas', 'event2');
     bindVas('event1GuiltVas');
@@ -553,7 +545,8 @@
     function collectData() {
       const locCount = document.querySelector('input[name="locCount"]:checked')?.value || '없음';
       const data = {
-        participantId: document.getElementById('participantId').value.trim(),
+        regNumber: document.getElementById('regNumber').value.trim(),
+        participantName: document.getElementById('participantName').value.trim(),
         responseDate: new Date().toISOString().slice(0, 10),
         period: document.querySelector('input[name="period"]:checked')?.value || '',
         stimPhase: document.querySelector('input[name="stimPhase"]:checked')?.value || '',
@@ -562,7 +555,6 @@
         vasDistraction: Number(document.getElementById('vasDistraction').value),
         vasDailyUrge: Number(document.getElementById('vasDailyUrge').value),
         vasHunger: Number(document.getElementById('vasHunger').value),
-        vasDistress: Number(document.getElementById('vasDistress').value),
         locCount: locCount,
         freeText: document.getElementById('freeText').value.trim()
       };
@@ -593,16 +585,16 @@
 
     function buildCsv(data) {
       const headers = [
-        '제출시각(로컬)', '연구참여번호', '응답날짜', 'Period', '자극단계', '회차',
-        '집착VAS', '주의분산VAS', '충동강도VAS', '배고픔VAS', '괴로움VAS',
+        '제출시각(로컬)', '연구등록번호', '이름', '응답날짜', 'Period', '자극단계', '회차',
+        '집착VAS', '주의분산VAS', '충동강도VAS', '배고픔VAS',
         '조절상실횟수',
         '사건1_발생시각', '사건1_지속시간(시)', '사건1_지속시간(분)', '사건1_음식종류', '사건1_조절VAS', '사건1_죄책감VAS',
         '사건2_발생시각', '사건2_지속시간(시)', '사건2_지속시간(분)', '사건2_음식종류', '사건2_조절VAS', '사건2_죄책감VAS',
         '자유기술'
       ];
       const row = [
-        new Date().toISOString(), data.participantId, data.responseDate, data.period, data.stimPhase, data.stimSession,
-        data.vasPreoccupation, data.vasDistraction, data.vasDailyUrge, data.vasHunger, data.vasDistress,
+        new Date().toISOString(), data.regNumber, data.participantName, data.responseDate, data.period, data.stimPhase, data.stimSession,
+        data.vasPreoccupation, data.vasDistraction, data.vasDailyUrge, data.vasHunger,
         data.locCount,
         data.event1Time, data.event1DurationHour, data.event1DurationMin, data.event1Food, data.event1ControlVas, data.event1GuiltVas,
         data.event2Time, data.event2DurationHour, data.event2DurationMin, data.event2Food, data.event2ControlVas, data.event2GuiltVas,
@@ -617,7 +609,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `loc26_${data.participantId}_${Date.now()}.csv`;
+        a.download = `loc26_${data.regNumber}_${Date.now()}.csv`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -635,7 +627,7 @@
 
       try {
         localStorage.setItem(
-          `loc26_backup_${data.participantId}_${Date.now()}`,
+          `loc26_backup_${data.regNumber}_${Date.now()}`,
           JSON.stringify(data)
         );
       } catch (e) { /* localStorage 사용 불가 시 무시 */ }
@@ -657,7 +649,7 @@
           document.getElementById('status-text').innerHTML =
             '네트워크 오류로 전송에 실패했습니다.<br>아래 버튼으로 백업 파일을 저장한 뒤 연구자에게 전달해 주세요.';
           document.getElementById('status-download').innerHTML =
-            `<a class="download-link" href="${url}" download="loc26_${data.participantId}_${Date.now()}.json">⬇ 백업 파일 저장</a>`;
+            `<a class="download-link" href="${url}" download="loc26_${data.regNumber}_${Date.now()}.json">⬇ 백업 파일 저장</a>`;
         });
     }
   </script>

@@ -209,9 +209,9 @@
     <!-- Q4: 마음을 차지하는 VAS -->
     <div class="card" data-step="q4">
       <div class="section-label">일일 설문 (지난 24시간 기준)</div>
-      <div class="q-title">지난 24시간 동안, 원치 않았음에도 불구하고 음식에 대한 생각에 집착했던 정도는 어느 정도였습니까? [일차 평가문항]</div>
+      <div class="q-title">지난 24시간 동안, 원하지 않는데도 음식에 대한 생각에 집착했던 적이 있으신가요? [일차 평가문항]</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 자주 있었다)</span></div>
         <input type="range" id="vasPreoccupation" min="0" max="100" step="1" value="50">
         <div class="vas-value" id="vasPreoccupationValue">50</div>
       </div>
@@ -222,13 +222,13 @@
       </div>
     </div>
 
-    <!-- Q5: 조절 어려움 VAS (일일) -->
+    <!-- Q5: 주의 분산 VAS (일일) -->
     <div class="card" data-step="q5">
-      <div class="q-title">지난 24시간 동안 먹고 싶은 음식이나 섭취 상황에서, 의도한 양이나 방식대로 먹는 것을 조절하기 가장 어려웠던 정도는 어느 정도였습니까? [핵심 이차 문항]</div>
+      <div class="q-title">지난 24시간 동안 음식 생각 때문에 다른 일에 집중하기가 어려웠던 순간, 집중하기 얼마나 어려웠습니까?</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
-        <input type="range" id="vasDailyControl" min="0" max="100" step="1" value="50">
-        <div class="vas-value" id="vasDailyControlValue">50</div>
+        <div class="vas-labels"><span>0 (전혀 어렵지 않았다)</span><span>100 (매우 어려웠다)</span></div>
+        <input type="range" id="vasDistraction" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasDistractionValue">50</div>
       </div>
       <div class="error-msg" id="err-q5">슬라이더를 움직여 응답을 확인해 주세요.</div>
       <div class="nav-row">
@@ -239,9 +239,9 @@
 
     <!-- Q6: 충동 강도 VAS (일일) -->
     <div class="card" data-step="q6">
-      <div class="q-title">지난 24시간 동안 먹고 싶은 충동이 가장 강했던 정도는 어느 정도였습니까? [핵심 이차 문항]</div>
+      <div class="q-title">지난 24시간 동안 특정 음식이 가장 먹고 싶었던 순간, 그 음식을 먹고 싶은 마음은 얼마나 강했습니까? [핵심 이차 문항]</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <div class="vas-labels"><span>0 (전혀 강하지 않았다)</span><span>100 (매우 강했다)</span></div>
         <input type="range" id="vasDailyUrge" min="0" max="100" step="1" value="50">
         <div class="vas-value" id="vasDailyUrgeValue">50</div>
       </div>
@@ -254,9 +254,9 @@
 
     <!-- Q7: 배고픔 VAS -->
     <div class="card" data-step="q7">
-      <div class="q-title">지난 24시간 동안 가장 배고팠던 순간의 배고픔 정도는 어느 정도였습니까?</div>
+      <div class="q-title">지난 24시간 동안 가장 배고팠던 순간, 배고픔을 얼마나 강하게 느꼈습니까?</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
+        <div class="vas-labels"><span>0 (전혀 배고프지 않았다)</span><span>100 (매우 배고팠다)</span></div>
         <input type="range" id="vasHunger" min="0" max="100" step="1" value="50">
         <div class="vas-value" id="vasHungerValue">50</div>
       </div>
@@ -267,13 +267,13 @@
       </div>
     </div>
 
-    <!-- Q8: 주의 분산 VAS -->
+    <!-- Q8: 괴로움 VAS -->
     <div class="card" data-step="q8">
-      <div class="q-title">지난 24시간 동안 음식 생각 때문에 다른 일에 주의를 돌리기 어려웠던 정도는 어느 정도였습니까?</div>
+      <div class="q-title">지난 24시간 동안 음식 생각이나 먹고 싶은 충동 때문에 가장 괴로웠던 순간, 얼마나 괴로웠습니까?</div>
       <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
-        <input type="range" id="vasDistraction" min="0" max="100" step="1" value="50">
-        <div class="vas-value" id="vasDistractionValue">50</div>
+        <div class="vas-labels"><span>0 (전혀 괴롭지 않았다)</span><span>100 (매우 괴로웠다)</span></div>
+        <input type="range" id="vasDistress" min="0" max="100" step="1" value="50">
+        <div class="vas-value" id="vasDistressValue">50</div>
       </div>
       <div class="error-msg" id="err-q8">슬라이더를 움직여 응답을 확인해 주세요.</div>
       <div class="nav-row">
@@ -282,55 +282,26 @@
       </div>
     </div>
 
-    <!-- Q9: 불쾌감/지장 VAS -->
+    <!-- Q9: 조절 상실 횟수 -->
     <div class="card" data-step="q9">
-      <div class="q-title">지난 24시간 동안 음식 생각이나 먹고 싶은 충동으로 인해 괴로웠던 정도는 어느 정도였습니까?</div>
-      <div class="vas-wrap">
-        <div class="vas-labels"><span>0 (전혀 없었다)</span><span>100 (매우 심했다)</span></div>
-        <input type="range" id="vasDistress" min="0" max="100" step="1" value="50">
-        <div class="vas-value" id="vasDistressValue">50</div>
-      </div>
-      <div class="error-msg" id="err-q9">슬라이더를 움직여 응답을 확인해 주세요.</div>
-      <div class="nav-row">
-        <button class="btn-secondary" onclick="goBack()">이전</button>
-        <button class="btn-primary" id="next-q9" onclick="goNext('q9')" disabled>다음</button>
-      </div>
-    </div>
-
-    <!-- Q10: 야간 섭취 -->
-    <div class="card" data-step="q10">
-      <div class="q-title">오늘 밤(야간)에 계획하지 않은 방식으로 음식을 드신 적이 있습니까?</div>
-      <div id="night-options">
-        <label class="option"><input type="radio" name="nightEating" value="예">예</label>
-        <label class="option"><input type="radio" name="nightEating" value="아니오">아니오</label>
-      </div>
-      <div class="error-msg" id="err-q10">응답을 선택해 주세요.</div>
-      <div class="nav-row">
-        <button class="btn-secondary" onclick="goBack()">이전</button>
-        <button class="btn-primary" onclick="goNext('q10')">다음</button>
-      </div>
-    </div>
-
-    <!-- Q11: 조절 상실 횟수 -->
-    <div class="card" data-step="q11">
       <div class="section-label">조절 상실 관련 섭취 사건 (지난 24시간 기준)</div>
-      <div class="q-title">지난 24시간 동안 먹는 중 스스로 조절하기 어렵다고 느낀 적이 있습니까?</div>
+      <div class="q-title">음식을 먹으면서 무엇을 얼마나 먹을지 스스로 조절할 수 없다고 느낀 적이 있습니까? (먹은 양이 많지 않았더라도 해당 경험이 있었다면 포함해 주세요.)</div>
       <div id="loc-options">
         <label class="option"><input type="radio" name="locCount" value="없음">없음</label>
         <label class="option"><input type="radio" name="locCount" value="1회">1회</label>
         <label class="option"><input type="radio" name="locCount" value="2회 이상">2회 이상</label>
       </div>
-      <div class="error-msg" id="err-q11">응답을 선택해 주세요.</div>
+      <div class="error-msg" id="err-q9">응답을 선택해 주세요.</div>
       <div class="nav-row">
         <button class="btn-secondary" onclick="goBack()">이전</button>
-        <button class="btn-primary" onclick="goNext('q11')">다음</button>
+        <button class="btn-primary" onclick="goNext('q9')">다음</button>
       </div>
     </div>
 
     <!-- 사건 1 -->
     <div class="card" data-step="event1">
       <div class="q-title">사건 1 (해당 시에만 작성)</div>
-      <div class="q-help">11번에서 1회 또는 2회 이상을 선택한 경우 작성합니다. 아래 항목은 모두 선택 입력입니다.</div>
+      <div class="q-help">9번에서 1회 또는 2회 이상을 선택한 경우 작성합니다. 아래 항목은 모두 선택 입력입니다.</div>
 
       <div class="field-block">
         <div class="q-sub">사건 1 - 발생 시각 (예: 오후 3시경)</div>
@@ -354,18 +325,12 @@
         <div class="error-msg" id="err-event1">슬라이더를 움직여 응답을 확인해 주세요.</div>
       </div>
       <div class="field-block">
-        <div class="q-sub">사건 1 - 그 사건으로 인해 느낀 괴로움의 정도 (0~100)</div>
+        <div class="q-sub">사건 1 - 그 사건으로 인해 느낀 죄책감의 정도 (0~100)</div>
         <div class="vas-wrap">
           <div class="vas-labels"><span>0</span><span>100</span></div>
-          <input type="range" id="event1DistressVas" min="0" max="100" step="1" value="50">
-          <div class="vas-value" id="event1DistressVasValue">50</div>
+          <input type="range" id="event1GuiltVas" min="0" max="100" step="1" value="50">
+          <div class="vas-value" id="event1GuiltVasValue">50</div>
         </div>
-      </div>
-      <div class="field-block">
-        <div class="q-sub">사건 1 - 섭취량이 그 상황에서 객관적으로 많았다고 생각하십니까?</div>
-        <label class="option"><input type="radio" name="event1AmountLarge" value="예">예</label>
-        <label class="option"><input type="radio" name="event1AmountLarge" value="아니오">아니오</label>
-        <label class="option"><input type="radio" name="event1AmountLarge" value="잘 모르겠음">잘 모르겠음</label>
       </div>
 
       <div class="nav-row">
@@ -377,7 +342,7 @@
     <!-- 사건 2 -->
     <div class="card" data-step="event2">
       <div class="q-title">사건 2 (2회 이상인 경우에만 작성)</div>
-      <div class="q-help">11번에서 2회 이상을 선택한 경우에만 작성합니다. 아래 항목은 모두 선택 입력입니다.</div>
+      <div class="q-help">9번에서 2회 이상을 선택한 경우에만 작성합니다. 아래 항목은 모두 선택 입력입니다.</div>
 
       <div class="field-block">
         <div class="q-sub">사건 2 - 발생 시각 (예: 오후 3시경)</div>
@@ -401,18 +366,12 @@
         <div class="error-msg" id="err-event2">슬라이더를 움직여 응답을 확인해 주세요.</div>
       </div>
       <div class="field-block">
-        <div class="q-sub">사건 2 - 그 사건으로 인해 느낀 괴로움의 정도 (0~100)</div>
+        <div class="q-sub">사건 2 - 그 사건으로 인해 느낀 죄책감의 정도 (0~100)</div>
         <div class="vas-wrap">
           <div class="vas-labels"><span>0</span><span>100</span></div>
-          <input type="range" id="event2DistressVas" min="0" max="100" step="1" value="50">
-          <div class="vas-value" id="event2DistressVasValue">50</div>
+          <input type="range" id="event2GuiltVas" min="0" max="100" step="1" value="50">
+          <div class="vas-value" id="event2GuiltVasValue">50</div>
         </div>
-      </div>
-      <div class="field-block">
-        <div class="q-sub">사건 2 - 섭취량이 그 상황에서 객관적으로 많았다고 생각하십니까?</div>
-        <label class="option"><input type="radio" name="event2AmountLarge" value="예">예</label>
-        <label class="option"><input type="radio" name="event2AmountLarge" value="아니오">아니오</label>
-        <label class="option"><input type="radio" name="event2AmountLarge" value="잘 모르겠음">잘 모르겠음</label>
       </div>
 
       <div class="nav-row">
@@ -470,14 +429,9 @@
         showError('q3', !val);
         return !!val;
       }
-      if (step === 'q10') {
-        const val = document.querySelector('input[name="nightEating"]:checked');
-        showError('q10', !val);
-        return !!val;
-      }
-      if (step === 'q11') {
+      if (step === 'q9') {
         const val = document.querySelector('input[name="locCount"]:checked');
-        showError('q11', !val);
+        showError('q9', !val);
         return !!val;
       }
       if (vasGatedSteps.includes(step)) {
@@ -490,8 +444,8 @@
 
     // 다음 단계 결정 (분기 포함)
     function nextStepAfter(step) {
-      const order = ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11'];
-      if (step === 'q11') {
+      const order = ['q1','q2','q3','q4','q5','q6','q7','q8','q9'];
+      if (step === 'q9') {
         const locCount = document.querySelector('input[name="locCount"]:checked').value;
         if (locCount === '없음') return 'q22';
         return 'event1';
@@ -521,7 +475,7 @@
       showStep(prev);
     }
 
-    const vasGatedSteps = ['q4','q5','q6','q7','q8','q9','event1','event2'];
+    const vasGatedSteps = ['q4','q5','q6','q7','q8','event1','event2'];
     const vasTouched = {};
     vasGatedSteps.forEach(step => { vasTouched[step] = false; });
 
@@ -538,15 +492,14 @@
       });
     }
     bindVas('vasPreoccupation', 'q4');
-    bindVas('vasDailyControl', 'q5');
+    bindVas('vasDistraction', 'q5');
     bindVas('vasDailyUrge', 'q6');
     bindVas('vasHunger', 'q7');
-    bindVas('vasDistraction', 'q8');
-    bindVas('vasDistress', 'q9');
+    bindVas('vasDistress', 'q8');
     bindVas('event1ControlVas', 'event1');
     bindVas('event2ControlVas', 'event2');
-    bindVas('event1DistressVas');
-    bindVas('event2DistressVas');
+    bindVas('event1GuiltVas');
+    bindVas('event2GuiltVas');
 
     function collectData() {
       const locCount = document.querySelector('input[name="locCount"]:checked')?.value || '없음';
@@ -556,12 +509,10 @@
         period: document.querySelector('input[name="period"]:checked')?.value || '',
         day: document.querySelector('input[name="day"]:checked')?.value || '',
         vasPreoccupation: Number(document.getElementById('vasPreoccupation').value),
-        vasDailyControl: Number(document.getElementById('vasDailyControl').value),
+        vasDistraction: Number(document.getElementById('vasDistraction').value),
         vasDailyUrge: Number(document.getElementById('vasDailyUrge').value),
         vasHunger: Number(document.getElementById('vasHunger').value),
-        vasDistraction: Number(document.getElementById('vasDistraction').value),
         vasDistress: Number(document.getElementById('vasDistress').value),
-        nightEating: document.querySelector('input[name="nightEating"]:checked')?.value || '',
         locCount: locCount,
         freeText: document.getElementById('freeText').value.trim()
       };
@@ -571,16 +522,14 @@
         data.event1Duration = document.getElementById('event1Duration').value.trim();
         data.event1Food = document.getElementById('event1Food').value.trim();
         data.event1ControlVas = Number(document.getElementById('event1ControlVas').value);
-        data.event1DistressVas = Number(document.getElementById('event1DistressVas').value);
-        data.event1AmountLarge = document.querySelector('input[name="event1AmountLarge"]:checked')?.value || '';
+        data.event1GuiltVas = Number(document.getElementById('event1GuiltVas').value);
       }
       if (locCount === '2회 이상') {
         data.event2Time = document.getElementById('event2Time').value.trim();
         data.event2Duration = document.getElementById('event2Duration').value.trim();
         data.event2Food = document.getElementById('event2Food').value.trim();
         data.event2ControlVas = Number(document.getElementById('event2ControlVas').value);
-        data.event2DistressVas = Number(document.getElementById('event2DistressVas').value);
-        data.event2AmountLarge = document.querySelector('input[name="event2AmountLarge"]:checked')?.value || '';
+        data.event2GuiltVas = Number(document.getElementById('event2GuiltVas').value);
       }
       return data;
     }

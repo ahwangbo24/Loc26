@@ -21,10 +21,10 @@
 
 var HEADERS = [
   '제출시각(서버)', '연구참여번호', '응답날짜', 'Period', 'Day',
-  '마음차지VAS', '조절어려움VAS(일일)', '충동강도VAS(일일)', '배고픔VAS', '주의분산VAS', '불쾌감VAS',
-  '야간섭취여부', '조절상실횟수',
-  '사건1_발생시각', '사건1_지속시간', '사건1_음식종류', '사건1_조절VAS', '사건1_괴로움VAS', '사건1_섭취량많음여부',
-  '사건2_발생시각', '사건2_지속시간', '사건2_음식종류', '사건2_조절VAS', '사건2_괴로움VAS', '사건2_섭취량많음여부',
+  '집착VAS', '주의분산VAS', '충동강도VAS', '배고픔VAS', '괴로움VAS',
+  '조절상실횟수',
+  '사건1_발생시각', '사건1_지속시간', '사건1_음식종류', '사건1_조절VAS', '사건1_죄책감VAS',
+  '사건2_발생시각', '사건2_지속시간', '사건2_음식종류', '사건2_조절VAS', '사건2_죄책감VAS',
   '자유기술'
 ];
 
@@ -50,25 +50,21 @@ function doPost(e) {
       val(data.period),
       val(data.day),
       val(data.vasPreoccupation),
-      val(data.vasDailyControl),
+      val(data.vasDistraction),
       val(data.vasDailyUrge),
       val(data.vasHunger),
-      val(data.vasDistraction),
       val(data.vasDistress),
-      val(data.nightEating),
       val(data.locCount),
       val(data.event1Time),
       val(data.event1Duration),
       val(data.event1Food),
       val(data.event1ControlVas),
-      val(data.event1DistressVas),
-      val(data.event1AmountLarge),
+      val(data.event1GuiltVas),
       val(data.event2Time),
       val(data.event2Duration),
       val(data.event2Food),
       val(data.event2ControlVas),
-      val(data.event2DistressVas),
-      val(data.event2AmountLarge),
+      val(data.event2GuiltVas),
       val(data.freeText)
     ]);
 
